@@ -6,6 +6,7 @@ type ElementTypes = {
   admin: {
     name: string;
     image: string;
+    occupation: string;
   }[];
 };
 
@@ -34,10 +35,16 @@ const data = async (req: NextApiRequest, res: NextApiResponse) => {
       admin: [],
     };
 
+    const betweenQuote = /"([^"]*)"/;
+
     for (let i = 0; i < admin.length; i++) {
       obj.admin.push({
         name: admin[i].querySelector("p").text,
-        image: admin[i].querySelector("img").rawAttrs,
+        image: admin[i]
+          .querySelector("img")
+          .rawAttrs.split(" ")[0]
+          .match(betweenQuote)[1],
+        occupation: admin[i].querySelector("span").text,
       });
     }
 
