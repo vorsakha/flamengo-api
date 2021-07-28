@@ -38,27 +38,46 @@ const data = async (req: NextApiRequest, res: NextApiResponse) => {
     };
 
     const allData = dom.querySelectorAll("ul").slice(3, 10);
+    const selectedData = {
+      listZero: allData[0].querySelectorAll("li"),
+      listOne: allData[1].querySelectorAll("li"),
+      listTwo: allData[2].querySelectorAll("li"),
+      listThree: allData[3].querySelectorAll("li"),
+      listFour: allData[4].querySelectorAll("li"),
+      listFive: allData[5].querySelectorAll("li"),
+      listSix: allData[6].querySelectorAll("li"),
+    };
+    const {
+      listZero,
+      listOne,
+      listTwo,
+      listThree,
+      listFour,
+      listFive,
+      listSix,
+    } = selectedData;
+    // console.log(allData[0].querySelectorAll("li")[0]);
 
-    for (let i = 0; i < allData[0].length; i++) {
-      obj.honours.international.push(allData[0][i].innerText);
+    for (let i = 0; i < listZero.length; i++) {
+      obj.honours.international.push(listZero[i].innerText);
     }
-    for (let i = 0; i < allData[1].length; i++) {
-      obj.honours.national.push(allData[1][i].innerText);
+    for (let i = 0; i < listOne.length; i++) {
+      obj.honours.national.push(listOne[i].innerText);
     }
-    for (let i = 0; i < allData[2].length; i++) {
-      obj.honours.state.push(allData[2][i].innerText);
+    for (let i = 0; i < listTwo.length; i++) {
+      obj.honours.state.push(listTwo[i].innerText);
     }
-    for (let i = 0; i < allData[3].length; i++) {
-      obj.honours.international.push(allData[3][i].innerText);
+    for (let i = 0; i < listThree.length; i++) {
+      obj.honours.international.push(listThree[i].innerText);
     }
-    for (let i = 0; i < allData[4].length; i++) {
-      obj.honours.international.push(allData[4][i].innerText);
+    for (let i = 0; i < listFour.length; i++) {
+      obj.honours.international.push(listFour[i].innerText);
     }
-    for (let i = 0; i < allData[5].length; i++) {
-      obj.honours.national.push(allData[5][i].innerText);
+    for (let i = 0; i < listFive.length; i++) {
+      obj.honours.national.push(listFive[i].innerText);
     }
-    for (let i = 0; i < allData[6].length; i++) {
-      obj.honours.state.push(allData[6][i].innerText);
+    for (let i = 0; i < listSix.length; i++) {
+      obj.honours.state.push(listSix[i].innerText);
     }
 
     res.status(200).json(obj);
