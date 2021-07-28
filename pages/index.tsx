@@ -17,7 +17,7 @@ export default function Home() {
         <div>
           <div>
             <h1>Flamengo API</h1>
-            <p>Documentation for the unofficial Flamengo API</p>
+            <p>Documentation for the unofficial, open source Flamengo API</p>
           </div>
 
           <Grid>

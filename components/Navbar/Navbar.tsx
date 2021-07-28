@@ -35,7 +35,11 @@ const Navbar = () => {
         </NavList>
 
         <NavFooter>
-          <a href="" target="_blank">
+          <a
+            href="https://github.com/vorsakha/flamengo-api"
+            target="_blank"
+            rel="noreferrer"
+          >
             Github
           </a>
         </NavFooter>
