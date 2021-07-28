@@ -80,6 +80,8 @@ const data = async (req: NextApiRequest, res: NextApiResponse) => {
       obj.honours.state.push(listSix[i].innerText);
     }
 
+    res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
+
     res.status(200).json(obj);
   } catch (error) {
     console.log(error);

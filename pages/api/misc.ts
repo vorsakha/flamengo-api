@@ -89,6 +89,8 @@ const data = async (req: NextApiRequest, res: NextApiResponse) => {
       nextMatches: nextGames,
     };
 
+    res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
+
     res.status(200).json(obj);
   } catch (error) {
     console.log(error);
