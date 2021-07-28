@@ -10,6 +10,7 @@ const Box = styled.div`
 
   p {
     color: #858585;
+    font-weight: 300;
   }
 
   h2 {

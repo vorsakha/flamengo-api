@@ -1,16 +1,16 @@
 import Head from "next/head";
-import { InferGetStaticPropsType } from "next";
 import Container from "../components/common/container";
 import axios from "axios";
+import { InferGetStaticPropsType } from "next";
 
 export async function getStaticProps() {
   try {
-    const res = await axios.get("http://localhost:3000/api/honours");
-    const honoursData = res.data;
+    const res = await axios.get("http://localhost:3000/api/misc");
+    const miscData = res.data;
 
     return {
       props: {
-        honours: honoursData,
+        misc: miscData,
       }, // will be passed to the page component as props
     };
   } catch (error) {
@@ -18,10 +18,8 @@ export async function getStaticProps() {
   }
 }
 
-const Honours = ({
-  honours,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const json = honours;
+const Misc = ({ misc }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const json = misc;
 
   return (
     <Container>
@@ -31,13 +29,15 @@ const Honours = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Honours</h1>
-      <code>GET http://localhost:3000/api/honours</code>
+      <h1>Miscellaneous</h1>
+      <code>GET http://localhost:3000/api/misc</code>
 
       <h2 style={{ margin: "2rem 0 1rem 0" }}>Data</h2>
       <p>
         <ul>
-          <li>All club professional honours</li>
+          <li>Club membership numbers</li>
+          <li>Last match results</li>
+          <li>Season scheduled games</li>
         </ul>
       </p>
 
@@ -47,4 +47,4 @@ const Honours = ({
   );
 };
 
-export default Honours;
+export default Misc;

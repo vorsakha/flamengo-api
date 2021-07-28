@@ -1,8 +1,28 @@
+import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
+import axios from "axios";
+import Container from "../components/common/container";
 
-const Squad = () => {
+export async function getStaticProps() {
+  try {
+    const res = await axios.get("http://localhost:3000/api/squad");
+    const squadData = res.data;
+
+    return {
+      props: {
+        squad: squadData,
+      }, // will be passed to the page component as props
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const Squad = ({ squad }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const json = squad;
+
   return (
-    <div>
+    <Container>
       <Head>
         <title>Flamengo API</title>
         <meta name="description" content="Flamengo football team info" />
@@ -10,10 +30,18 @@ const Squad = () => {
       </Head>
 
       <h1>Squad Information</h1>
-      <code>http://localhost:3000/api/squad</code>
+      <code>GET http://localhost:3000/api/squad</code>
 
-      <pre>asdadsdasda as a as a dd as</pre>
-    </div>
+      <h2 style={{ margin: "2rem 0 1rem 0" }}>Data</h2>
+      <p>
+        <ul>
+          <li>All professional football squad</li>
+        </ul>
+      </p>
+
+      <h2 style={{ margin: "2rem 0 1rem 0" }}>Example Response</h2>
+      <pre>{JSON.stringify(json, undefined, 2)}</pre>
+    </Container>
   );
 };
 

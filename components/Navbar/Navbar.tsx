@@ -21,16 +21,16 @@ const Navbar = () => {
             <Link href="/">Getting Started</Link>
           </NavListItem>
           <NavListItem>
-            <Link href="/">Squad</Link>
+            <Link href="/squad">Squad</Link>
           </NavListItem>
           <NavListItem>
-            <Link href="/">Staff</Link>
+            <Link href="/staff">Staff</Link>
           </NavListItem>
           <NavListItem>
-            <Link href="/">Honours</Link>
+            <Link href="/honours">Honours</Link>
           </NavListItem>
           <NavListItem>
-            <Link href="/">Miscellaneous</Link>
+            <Link href="/misc">Miscellaneous</Link>
           </NavListItem>
         </NavList>
 

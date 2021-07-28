@@ -28,12 +28,27 @@ main {
   min-height: 100vh;
 }
 
+code {
+  background-color: #fcfcfc;
+  border: 1px solid rgba(75, 85, 99, 0.1); 
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+pre {
+  background-color: #fcfcfc;
+  border: 1px solid rgba(75, 85, 99, 0.1); 
+  border-radius: 4px;
+  padding: 1rem;
+}
+
 a {
   text-decoration: none;
-  color: #295bff;
+  color: #ff2929;
+  font-weight: bold;
 }
 a:hover {
-    color: #2752df;
+    color: #d52424;
 }
 `;
 

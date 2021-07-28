@@ -45,7 +45,7 @@ export default function Home() {
                 </Box>
               </a>
             </Link>
-            <Link href="miscellaneous">
+            <Link href="misc">
               <a>
                 <Box>
                   <h2>Miscellaneous</h2>
