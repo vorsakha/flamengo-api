@@ -3,7 +3,7 @@ const { parse } = require("node-html-parser");
 const puppeteer = require("puppeteer");
 
 type ElementTypes = {
-  admin: {
+  staff: {
     name: string;
     image: string;
     occupation: string;
@@ -29,22 +29,22 @@ const data = async (req: NextApiRequest, res: NextApiResponse) => {
     const dom = parse(data);
 
     // Manipulate dom
-    const admin = dom.querySelectorAll("figure");
+    const staff = dom.querySelectorAll("figure");
 
     const obj: ElementTypes = {
-      admin: [],
+      staff: [],
     };
 
     const betweenQuote = /"([^"]*)"/;
 
-    for (let i = 0; i < admin.length; i++) {
-      obj.admin.push({
-        name: admin[i].querySelector("p").text,
-        image: admin[i]
+    for (let i = 0; i < staff.length; i++) {
+      obj.staff.push({
+        name: staff[i].querySelector("p").text,
+        image: staff[i]
           .querySelector("img")
           .rawAttrs.split(" ")[0]
           .match(betweenQuote)[1],
-        occupation: admin[i].querySelector("span").text,
+        occupation: staff[i].querySelector("span").text,
       });
     }
 
