@@ -1,3 +1,4 @@
+import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import {
   NavContainer,
@@ -9,6 +10,8 @@ import {
 } from "./Navbar.styles";
 
 const Navbar = () => {
+  const router = useRouter();
+
   return (
     <NavContainer>
       <NavWrapper>
@@ -18,19 +21,69 @@ const Navbar = () => {
 
         <NavList>
           <NavListItem>
-            <Link href="/">Getting Started</Link>
+            <Link href="/">
+              <a
+                style={
+                  router.pathname == "/"
+                    ? { color: "#d52424" }
+                    : { color: "#ff2929" }
+                }
+              >
+                Getting Started
+              </a>
+            </Link>
           </NavListItem>
           <NavListItem>
-            <Link href="/squad">Squad</Link>
+            <Link href="/squad">
+              <a
+                style={
+                  router.pathname == "/squad"
+                    ? { color: "#d52424" }
+                    : { color: "#ff2929" }
+                }
+              >
+                Squad
+              </a>
+            </Link>
           </NavListItem>
           <NavListItem>
-            <Link href="/staff">Staff</Link>
+            <Link href="/staff">
+              <a
+                style={
+                  router.pathname == "/staff"
+                    ? { color: "#d52424" }
+                    : { color: "#ff2929" }
+                }
+              >
+                Staff
+              </a>
+            </Link>
           </NavListItem>
           <NavListItem>
-            <Link href="/honours">Honours</Link>
+            <Link href="/honours">
+              <a
+                style={
+                  router.pathname == "/honours"
+                    ? { color: "#d52424" }
+                    : { color: "#ff2929" }
+                }
+              >
+                Honours
+              </a>
+            </Link>
           </NavListItem>
           <NavListItem>
-            <Link href="/misc">Miscellaneous</Link>
+            <Link href="/misc">
+              <a
+                style={
+                  router.pathname == "/misc"
+                    ? { color: "#d52424" }
+                    : { color: "#ff2929" }
+                }
+              >
+                Miscellaneous
+              </a>
+            </Link>
           </NavListItem>
         </NavList>
 
