@@ -36,7 +36,7 @@ const Misc = ({ misc }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <p>
         <ul>
           <li>Club membership numbers</li>
-          <li>Last match results</li>
+          {/* <li>Last match results</li> */}
           <li>Season scheduled games</li>
         </ul>
       </p>

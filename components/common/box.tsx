@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Box = styled.div`
-  border: 1px solid rgba(75, 85, 99, 0.1);
+  border: 1px solid rgba(213, 62, 62, 0.3);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   padding: 1rem;
   background-color: #fcfcfc;
