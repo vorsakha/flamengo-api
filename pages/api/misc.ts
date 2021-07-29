@@ -100,7 +100,7 @@ export default async function miscHandler(
 
         res.status(200).json(obj);
       } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(400).json({ error: "Server Error." });
       }
       break;
