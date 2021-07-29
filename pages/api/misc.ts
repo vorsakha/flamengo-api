@@ -24,7 +24,7 @@ export default async function miscHandler(
       try {
         const membersDom = await getDom(membersUrl, isDev);
 
-        const members = membersDom.querySelector(".number").innerText.trim();
+        const members = membersDom.querySelector(".number").text.trim();
 
         const obj: Data = {
           members: members,
