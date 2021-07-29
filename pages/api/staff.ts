@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-const { parse } = require("node-html-parser");
-const puppeteer = require("puppeteer");
+import { getDom } from "./_lib/chromium";
 
 type ElementTypes = {
   staff: {
@@ -12,6 +11,9 @@ type ElementTypes = {
 
 const url = "https://www.flamengo.com.br/comissao-tecnica";
 
+// check if is in prod or dev
+const isDev = !process.env.AWS_REGION;
+
 export default async function staffHandler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -21,19 +23,7 @@ export default async function staffHandler(
   switch (method) {
     case "GET":
       try {
-        // Puppeteer
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-
-        await page.goto(url);
-
-        const data = await page.evaluate(() => document.body.innerHTML);
-
-        await browser.close();
-        //
-
-        // Parse html text to dom
-        const dom = parse(data);
+        const dom = await getDom(url, isDev);
 
         // Manipulate dom
         const staff = dom.querySelectorAll("figure");

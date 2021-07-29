@@ -1,18 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-const { parse } = require("node-html-parser");
-const puppeteer = require("puppeteer");
+import { getDom } from "./_lib/chromium";
 
-type Data = {
+// Types
+interface Data {
   members: string;
   // lastMatch: string;
   nextMatches: string[];
-};
+}
 
+// Chrome dev path
+const devPath =
+  "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+
+// URLS
 const nextGamesUrl =
   "https://www.espn.com.br/futebol/time/calendario/_/id/819/flamengo";
 // const lastGameUrl = "https://www.flashscore.com.br/equipe/flamengo/WjxY29qB/";
 const membersUrl =
   "https://www.nrnoficial.com.br/?utm_source=portal&utm_medium=menu&utm_campaign=associese";
+
+// check if is in prod or dev
+const isDev = !process.env.AWS_REGION;
 
 export default async function miscHandler(
   req: NextApiRequest,
@@ -23,42 +31,18 @@ export default async function miscHandler(
   switch (method) {
     case "GET":
       try {
-        // Puppeteer
-        const browser = await puppeteer.launch();
-        // const lastGamePage = await browser.newPage();
-        const membersPage = await browser.newPage();
-        const nextGamesPage = await browser.newPage();
-
-        // await lastGamePage.goto(lastGameUrl);
-        await membersPage.goto(membersUrl);
-        await nextGamesPage.goto(nextGamesUrl);
-
-        // const lastGameData = await lastGamePage.evaluate(
-        //   () => document.body.innerHTML
-        // );
-        const membersData = await membersPage.evaluate(
-          () => document.body.innerHTML
-        );
-        const nextGamesData = await nextGamesPage.evaluate(
-          () => document.body.innerHTML
-        );
-
-        await browser.close();
-        //
-
-        // Parse html text to dom
         // const lastGameDom = parse(lastGameData);
-        const membersDom = parse(membersData);
-        const nextGamesDom = parse(nextGamesData);
+        const membersDom = await getDom(membersUrl, isDev);
+        const nextGamesDom = await getDom(nextGamesUrl, isDev);
 
         // Manipulate dom
         // Next Games
         const allLocal = nextGamesDom
           .querySelectorAll(".local")
-          .map((item: HTMLElement) => item.innerText);
+          .map((item) => item.innerText);
         const allAway = nextGamesDom
           .querySelectorAll(".away")
-          .map((item: HTMLElement) => item.innerText);
+          .map((item) => item.innerText);
 
         const nextGames = [];
 
