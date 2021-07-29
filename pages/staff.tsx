@@ -5,13 +5,13 @@ import { InferGetStaticPropsType } from "next";
 
 export async function getStaticProps() {
   try {
-    const res = await axios.get("https://dog.ceo/api/breeds/image/random");
+    const res = await axios.get("https://flamengo-api.vercel.app/api/staff");
     const staffData = res.data;
 
     return {
       props: {
         staff: staffData,
-      }, // will be passed to the page component as props
+      },
     };
   } catch (error) {
     console.log(error);

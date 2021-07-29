@@ -5,13 +5,13 @@ import axios from "axios";
 
 export async function getStaticProps() {
   try {
-    const res = await axios.get("https://dog.ceo/api/breeds/image/random");
+    const res = await axios.get("https://flamengo-api.vercel.app/api/honours");
     const honoursData = res.data;
 
     return {
       props: {
         honours: honoursData,
-      }, // will be passed to the page component as props
+      },
     };
   } catch (error) {
     console.log(error);
