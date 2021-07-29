@@ -32,7 +32,7 @@ const Squad = () =>
         </Head>
 
         <h1>Squad Information</h1>
-        <code>GET http://localhost:3000/api/squad</code>
+        <code>GET https://flamengo-api.vercel.app/api/squad</code>
 
         <h2 style={{ margin: "2rem 0 1rem 0" }}>Data</h2>
         <p>

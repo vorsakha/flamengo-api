@@ -34,7 +34,7 @@ const Honours = () =>
         </Head>
 
         <h1>Honours</h1>
-        <code>GET http://localhost:3000/api/honours</code>
+        <code>GET https://flamengo-api.vercel.app/api/honours</code>
 
         <h2 style={{ margin: "2rem 0 1rem 0" }}>Data</h2>
         <p>
