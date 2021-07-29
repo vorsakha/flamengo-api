@@ -32,15 +32,12 @@ export default async function staffHandler(
           staff: [],
         };
 
-        const betweenQuote = /"([^"]*)"/;
+        // const betweenQuote = /"([^"]*)"/;
 
         for (let i = 0; i < staff.length; i++) {
           obj.staff.push({
             name: staff[i].querySelector("p").text,
-            image: staff[i]
-              .querySelector("img")
-              .rawAttrs.split(" ")[0]
-              .match(betweenQuote)[1],
+            image: staff[i].querySelector("img").getAttribute("src")!,
             occupation: staff[i].querySelector("span").text,
           });
         }

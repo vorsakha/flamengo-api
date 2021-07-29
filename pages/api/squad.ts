@@ -78,43 +78,45 @@ export default async function squadHandler(
         for (let i = 0; i < keepers.length; i++) {
           obj.players.keepers.push({
             name: keepers[i].querySelector("p").text,
-            image: keepers[i].querySelector("img")._rawAttrs.src,
+            image: keepers[i].querySelector("img").getAttribute("src")!,
           });
         }
         for (let i = 0; i < centerBacks.length; i++) {
           obj.players.centerBacks.push({
             name: centerBacks[i].querySelector("p").text,
-            image: centerBacks[i].querySelector("img")._rawAttrs.src,
+            image: centerBacks[i].querySelector("img").getAttribute("src")!,
           });
         }
         for (let i = 0; i < rightBacks.length; i++) {
           obj.players.rightBacks.push({
             name: rightBacks[i].querySelector("p").text,
-            image: rightBacks[i].querySelector("img")._rawAttrs.src,
+            image: rightBacks[i].querySelector("img").getAttribute("src")!,
           });
         }
         for (let i = 0; i < leftBacks.length; i++) {
           obj.players.leftBacks.push({
             name: leftBacks[i].querySelector("p").text,
-            image: leftBacks[i].querySelector("img")._rawAttrs.src,
+            image: leftBacks[i].querySelector("img").getAttribute("src")!,
           });
         }
         for (let i = 0; i < midfielders.length; i++) {
           obj.players.midfielders.push({
             name: midfielders[i].querySelector("p").text,
-            image: midfielders[i].querySelector("img")._rawAttrs.src,
+            image: midfielders[i].querySelector("img").getAttribute("src")!,
           });
         }
         for (let i = 0; i < attackMidfielders.length; i++) {
           obj.players.attackMidfielders.push({
             name: attackMidfielders[i].querySelector("p").text,
-            image: attackMidfielders[i].querySelector("img")._rawAttrs.src,
+            image: attackMidfielders[i]
+              .querySelector("img")
+              .getAttribute("src")!,
           });
         }
         for (let i = 0; i < strikers.length; i++) {
           obj.players.strikers.push({
             name: strikers[i].querySelector("p").text,
-            image: strikers[i].querySelector("img")._rawAttrs.src,
+            image: strikers[i].querySelector("img").getAttribute("src")!,
           });
         }
 
