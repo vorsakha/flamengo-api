@@ -5,7 +5,7 @@ import { getDom } from "../../_lib/chromium";
 interface Data {
   members: string;
   // lastMatch: string;
-  nextMatches: string[];
+  // nextMatches: string[];
 }
 
 // Chrome dev path
@@ -33,22 +33,22 @@ export default async function miscHandler(
       try {
         // const lastGameDom = parse(lastGameData);
         const membersDom = await getDom(membersUrl, isDev);
-        const nextGamesDom = await getDom(nextGamesUrl, isDev);
+        // const nextGamesDom = await getDom(nextGamesUrl, isDev);
 
         // Manipulate dom
         // Next Games
-        const allLocal = nextGamesDom
-          .querySelectorAll(".local")
-          .map((item) => item.innerText);
-        const allAway = nextGamesDom
-          .querySelectorAll(".away")
-          .map((item) => item.innerText);
+        // const allLocal = nextGamesDom
+        //   .querySelectorAll(".local")
+        //   .map((item) => item.innerText);
+        // const allAway = nextGamesDom
+        //   .querySelectorAll(".away")
+        //   .map((item) => item.innerText);
 
-        const nextGames = [];
+        // const nextGames = [];
 
-        for (let i = 0; i < allLocal.length; i++) {
-          nextGames.push(`${allLocal[i]} x ${allAway[i]}`);
-        }
+        // for (let i = 0; i < allLocal.length; i++) {
+        //   nextGames.push(`${allLocal[i]} x ${allAway[i]}`);
+        //}
 
         // Last game
         // const region = lastGameDom.querySelector(".event__title--type").textContent;
@@ -77,7 +77,7 @@ export default async function miscHandler(
         const obj: Data = {
           members: members,
           // lastMatch: lastGame,
-          nextMatches: nextGames,
+          // nextMatches: nextGames,
         };
 
         res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
