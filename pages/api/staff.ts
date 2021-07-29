@@ -13,47 +13,58 @@ type ElementTypes = {
 const url = "https://www.flamengo.com.br/comissao-tecnica";
 
 const data = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
-    // Puppeteer
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
+  const { method } = req;
 
-    await page.goto(url);
+  switch (method) {
+    case "GET":
+      try {
+        // Puppeteer
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
 
-    const data = await page.evaluate(() => document.body.innerHTML);
+        await page.goto(url);
 
-    await browser.close();
-    //
+        const data = await page.evaluate(() => document.body.innerHTML);
 
-    // Parse html text to dom
-    const dom = parse(data);
+        await browser.close();
+        //
 
-    // Manipulate dom
-    const staff = dom.querySelectorAll("figure");
+        // Parse html text to dom
+        const dom = parse(data);
 
-    const obj: ElementTypes = {
-      staff: [],
-    };
+        // Manipulate dom
+        const staff = dom.querySelectorAll("figure");
 
-    const betweenQuote = /"([^"]*)"/;
+        const obj: ElementTypes = {
+          staff: [],
+        };
 
-    for (let i = 0; i < staff.length; i++) {
-      obj.staff.push({
-        name: staff[i].querySelector("p").text,
-        image: staff[i]
-          .querySelector("img")
-          .rawAttrs.split(" ")[0]
-          .match(betweenQuote)[1],
-        occupation: staff[i].querySelector("span").text,
-      });
-    }
+        const betweenQuote = /"([^"]*)"/;
 
-    res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
+        for (let i = 0; i < staff.length; i++) {
+          obj.staff.push({
+            name: staff[i].querySelector("p").text,
+            image: staff[i]
+              .querySelector("img")
+              .rawAttrs.split(" ")[0]
+              .match(betweenQuote)[1],
+            occupation: staff[i].querySelector("span").text,
+          });
+        }
 
-    res.status(200).json(obj);
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ error: "Server Error." });
+        res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
+
+        res.status(200).json(obj);
+      } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: "Server Error." });
+      }
+
+      break;
+
+    default:
+      res.status(400).json({ error: "Wrong Method." });
+      break;
   }
 };
 

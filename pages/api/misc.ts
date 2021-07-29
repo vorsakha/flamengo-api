@@ -15,86 +15,96 @@ const membersUrl =
   "https://www.nrnoficial.com.br/?utm_source=portal&utm_medium=menu&utm_campaign=associese";
 
 const data = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
-    // Puppeteer
-    const browser = await puppeteer.launch();
-    // const lastGamePage = await browser.newPage();
-    const membersPage = await browser.newPage();
-    const nextGamesPage = await browser.newPage();
+  const { method } = req;
 
-    // await lastGamePage.goto(lastGameUrl);
-    await membersPage.goto(membersUrl);
-    await nextGamesPage.goto(nextGamesUrl);
+  switch (method) {
+    case "GET":
+      try {
+        // Puppeteer
+        const browser = await puppeteer.launch();
+        // const lastGamePage = await browser.newPage();
+        const membersPage = await browser.newPage();
+        const nextGamesPage = await browser.newPage();
 
-    // const lastGameData = await lastGamePage.evaluate(
-    //   () => document.body.innerHTML
-    // );
-    const membersData = await membersPage.evaluate(
-      () => document.body.innerHTML
-    );
-    const nextGamesData = await nextGamesPage.evaluate(
-      () => document.body.innerHTML
-    );
+        // await lastGamePage.goto(lastGameUrl);
+        await membersPage.goto(membersUrl);
+        await nextGamesPage.goto(nextGamesUrl);
 
-    await browser.close();
-    //
+        // const lastGameData = await lastGamePage.evaluate(
+        //   () => document.body.innerHTML
+        // );
+        const membersData = await membersPage.evaluate(
+          () => document.body.innerHTML
+        );
+        const nextGamesData = await nextGamesPage.evaluate(
+          () => document.body.innerHTML
+        );
 
-    // Parse html text to dom
-    // const lastGameDom = parse(lastGameData);
-    const membersDom = parse(membersData);
-    const nextGamesDom = parse(nextGamesData);
+        await browser.close();
+        //
 
-    // Manipulate dom
-    // Next Games
-    const allLocal = nextGamesDom
-      .querySelectorAll(".local")
-      .map((item: HTMLElement) => item.innerText);
-    const allAway = nextGamesDom
-      .querySelectorAll(".away")
-      .map((item: HTMLElement) => item.innerText);
+        // Parse html text to dom
+        // const lastGameDom = parse(lastGameData);
+        const membersDom = parse(membersData);
+        const nextGamesDom = parse(nextGamesData);
 
-    const nextGames = [];
+        // Manipulate dom
+        // Next Games
+        const allLocal = nextGamesDom
+          .querySelectorAll(".local")
+          .map((item: HTMLElement) => item.innerText);
+        const allAway = nextGamesDom
+          .querySelectorAll(".away")
+          .map((item: HTMLElement) => item.innerText);
 
-    for (let i = 0; i < allLocal.length; i++) {
-      nextGames.push(`${allLocal[i]} x ${allAway[i]}`);
-    }
+        const nextGames = [];
 
-    // Last game
-    // const region = lastGameDom.querySelector(".event__title--type").textContent;
-    // const league = lastGameDom.querySelector(".event__title--name").textContent;
-    // const homeTeam = lastGameDom.querySelector(
-    //   ".event__participant--home"
-    // ).textContent;
-    // const awayTeam = lastGameDom.querySelector(
-    //   ".event__participant--away"
-    // ).textContent;
+        for (let i = 0; i < allLocal.length; i++) {
+          nextGames.push(`${allLocal[i]} x ${allAway[i]}`);
+        }
 
-    // const score = lastGameDom
-    //   .querySelector(".event__scores")
-    //   .querySelectorAll("span");
+        // Last game
+        // const region = lastGameDom.querySelector(".event__title--type").textContent;
+        // const league = lastGameDom.querySelector(".event__title--name").textContent;
+        // const homeTeam = lastGameDom.querySelector(
+        //   ".event__participant--home"
+        // ).textContent;
+        // const awayTeam = lastGameDom.querySelector(
+        //   ".event__participant--away"
+        // ).textContent;
 
-    // const scores = {
-    //   home: score[0].textContent,
-    //   away: score[1].textContent,
-    // };
+        // const score = lastGameDom
+        //   .querySelector(".event__scores")
+        //   .querySelectorAll("span");
 
-    // const lastGame = `'${region}-${league}: ${homeTeam} ${scores.home} x ${scores.away} ${awayTeam}'`;
+        // const scores = {
+        //   home: score[0].textContent,
+        //   away: score[1].textContent,
+        // };
 
-    // Members
-    const members = membersDom.querySelector(".number").innerText.trim();
+        // const lastGame = `'${region}-${league}: ${homeTeam} ${scores.home} x ${scores.away} ${awayTeam}'`;
 
-    const obj: Data = {
-      members: members,
-      // lastMatch: lastGame,
-      nextMatches: nextGames,
-    };
+        // Members
+        const members = membersDom.querySelector(".number").innerText.trim();
 
-    res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
+        const obj: Data = {
+          members: members,
+          // lastMatch: lastGame,
+          nextMatches: nextGames,
+        };
 
-    res.status(200).json(obj);
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ error: "Server Error." });
+        res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
+
+        res.status(200).json(obj);
+      } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: "Server Error." });
+      }
+      break;
+
+    default:
+      res.status(400).json({ error: "Wrong Method." });
+      break;
   }
 };
 

@@ -13,79 +13,90 @@ type ElementTypes = {
 const url = "https://www.flamengo.com.br/titulosdoflamengo";
 
 const data = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
-    // Puppeteer
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
+  const { method } = req;
 
-    await page.goto(url);
+  switch (method) {
+    case "GET":
+      try {
+        // Puppeteer
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
 
-    const data = await page.evaluate(() => document.body.innerHTML);
+        await page.goto(url);
 
-    await browser.close();
-    //
+        const data = await page.evaluate(() => document.body.innerHTML);
 
-    // Parse html text to dom
-    const dom = parse(data);
+        await browser.close();
+        //
 
-    // Manipulate dom
-    const obj: ElementTypes = {
-      honours: {
-        international: [],
-        national: [],
-        state: [],
-      },
-    };
+        // Parse html text to dom
+        const dom = parse(data);
 
-    const allData = dom.querySelectorAll("ul").slice(3, 10);
-    const selectedData = {
-      listZero: allData[0].querySelectorAll("li"),
-      listOne: allData[1].querySelectorAll("li"),
-      listTwo: allData[2].querySelectorAll("li"),
-      listThree: allData[3].querySelectorAll("li"),
-      listFour: allData[4].querySelectorAll("li"),
-      listFive: allData[5].querySelectorAll("li"),
-      listSix: allData[6].querySelectorAll("li"),
-    };
-    const {
-      listZero,
-      listOne,
-      listTwo,
-      listThree,
-      listFour,
-      listFive,
-      listSix,
-    } = selectedData;
-    // console.log(allData[0].querySelectorAll("li")[0]);
+        // Manipulate dom
+        const obj: ElementTypes = {
+          honours: {
+            international: [],
+            national: [],
+            state: [],
+          },
+        };
 
-    for (let i = 0; i < listZero.length; i++) {
-      obj.honours.international.push(listZero[i].innerText);
-    }
-    for (let i = 0; i < listOne.length; i++) {
-      obj.honours.national.push(listOne[i].innerText);
-    }
-    for (let i = 0; i < listTwo.length; i++) {
-      obj.honours.state.push(listTwo[i].innerText);
-    }
-    for (let i = 0; i < listThree.length; i++) {
-      obj.honours.international.push(listThree[i].innerText);
-    }
-    for (let i = 0; i < listFour.length; i++) {
-      obj.honours.international.push(listFour[i].innerText);
-    }
-    for (let i = 0; i < listFive.length; i++) {
-      obj.honours.national.push(listFive[i].innerText);
-    }
-    for (let i = 0; i < listSix.length; i++) {
-      obj.honours.state.push(listSix[i].innerText);
-    }
+        const allData = dom.querySelectorAll("ul").slice(3, 10);
+        const selectedData = {
+          listZero: allData[0].querySelectorAll("li"),
+          listOne: allData[1].querySelectorAll("li"),
+          listTwo: allData[2].querySelectorAll("li"),
+          listThree: allData[3].querySelectorAll("li"),
+          listFour: allData[4].querySelectorAll("li"),
+          listFive: allData[5].querySelectorAll("li"),
+          listSix: allData[6].querySelectorAll("li"),
+        };
+        const {
+          listZero,
+          listOne,
+          listTwo,
+          listThree,
+          listFour,
+          listFive,
+          listSix,
+        } = selectedData;
+        // console.log(allData[0].querySelectorAll("li")[0]);
 
-    res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
+        for (let i = 0; i < listZero.length; i++) {
+          obj.honours.international.push(listZero[i].innerText);
+        }
+        for (let i = 0; i < listOne.length; i++) {
+          obj.honours.national.push(listOne[i].innerText);
+        }
+        for (let i = 0; i < listTwo.length; i++) {
+          obj.honours.state.push(listTwo[i].innerText);
+        }
+        for (let i = 0; i < listThree.length; i++) {
+          obj.honours.international.push(listThree[i].innerText);
+        }
+        for (let i = 0; i < listFour.length; i++) {
+          obj.honours.international.push(listFour[i].innerText);
+        }
+        for (let i = 0; i < listFive.length; i++) {
+          obj.honours.national.push(listFive[i].innerText);
+        }
+        for (let i = 0; i < listSix.length; i++) {
+          obj.honours.state.push(listSix[i].innerText);
+        }
 
-    res.status(200).json(obj);
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ error: "Server Error." });
+        res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
+
+        res.status(200).json(obj);
+      } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: "Server Error." });
+      }
+
+      break;
+
+    default:
+      res.status(400).json({ error: "Wrong Method." });
+      break;
   }
 };
 
