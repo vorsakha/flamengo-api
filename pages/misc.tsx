@@ -6,7 +6,7 @@ import { InferGetStaticPropsType } from "next";
 export async function getStaticProps() {
   try {
     // const res = await axios.get(`${process.env.VERCEL_URL}/api/misc`);
-    const res = await axios.get(`https://flamengo-api.vercel.app/api/misc`);
+    const res = await axios.get(`https://dog.ceo/api/breeds/image/random`);
     const miscData = res.data;
 
     return {
