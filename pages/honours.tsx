@@ -37,11 +37,11 @@ const Honours = () =>
         <code>GET https://flamengo-api.vercel.app/api/honours</code>
 
         <h2 style={{ margin: "2rem 0 1rem 0" }}>Data</h2>
-        <p>
+        <div>
           <ul>
             <li>All club professional honours</li>
           </ul>
-        </p>
+        </div>
 
         <h2 style={{ margin: "2rem 0 1rem 0" }}>Example Response</h2>
         <pre>{JSON.stringify(json, undefined, 2)}</pre>

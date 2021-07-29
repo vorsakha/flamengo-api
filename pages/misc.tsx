@@ -34,13 +34,13 @@ const Misc = ({ misc }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <code>GET https://flamengo-api.vercel.app/api/misc</code>
 
       <h2 style={{ margin: "2rem 0 1rem 0" }}>Data</h2>
-      <p>
+      <div>
         <ul>
           <li>Club membership numbers</li>
           {/* <li>Last match results</li> */}
           {/* <li>Season scheduled games</li> */}
         </ul>
-      </p>
+      </div>
 
       <h2 style={{ margin: "2rem 0 1rem 0" }}>Example Response</h2>
       <pre>{JSON.stringify(json, undefined, 2)}</pre>

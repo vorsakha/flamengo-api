@@ -35,11 +35,11 @@ const Staff = () =>
         <code>GET https://flamengo-api.vercel.app/api/staff</code>
 
         <h2 style={{ margin: "2rem 0 1rem 0" }}>Data</h2>
-        <p>
+        <div>
           <ul>
             <li>Professional football staff</li>
           </ul>
-        </p>
+        </div>
 
         <h2 style={{ margin: "2rem 0 1rem 0" }}>Example Response</h2>
         <pre>{JSON.stringify(json, undefined, 2)}</pre>
