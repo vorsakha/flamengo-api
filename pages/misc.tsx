@@ -5,7 +5,7 @@ import { InferGetStaticPropsType } from "next";
 
 export async function getStaticProps() {
   try {
-    const res = await axios.get("http://localhost:3000/api/misc");
+    const res = await axios.get("https://dog.ceo/api/breeds/image/random");
     const miscData = res.data;
 
     return {

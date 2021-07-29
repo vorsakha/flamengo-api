@@ -5,7 +5,7 @@ import axios from "axios";
 
 export async function getStaticProps() {
   try {
-    const res = await axios.get("http://localhost:3000/api/honours");
+    const res = await axios.get("https://dog.ceo/api/breeds/image/random");
     const honoursData = res.data;
 
     return {

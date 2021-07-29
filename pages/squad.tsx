@@ -5,7 +5,7 @@ import Container from "../components/common/container";
 
 export async function getStaticProps() {
   try {
-    const res = await axios.get("http://localhost:3000/api/squad");
+    const res = await axios.get("https://dog.ceo/api/breeds/image/random");
     const squadData = res.data;
 
     return {
