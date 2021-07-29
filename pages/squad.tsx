@@ -5,7 +5,7 @@ import Container from "../components/common/container";
 
 export async function getStaticProps() {
   try {
-    const res = await axios.get("https://flamengo-api.vercel.app/api/squad");
+    const res = await axios.get(`${process.env.VERCEL_URL}/api/squad`);
     const squadData = res.data;
 
     return {

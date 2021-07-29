@@ -5,7 +5,7 @@ import { InferGetStaticPropsType } from "next";
 
 export async function getStaticProps() {
   try {
-    const res = await axios.get("https://flamengo-api.vercel.app/api/staff");
+    const res = await axios.get(`${process.env.VERCEL_URL}/api/staff`);
     const staffData = res.data;
 
     return {

@@ -5,7 +5,7 @@ import axios from "axios";
 
 export async function getStaticProps() {
   try {
-    const res = await axios.get("https://flamengo-api.vercel.app/api/honours");
+    const res = await axios.get(`${process.env.VERCEL_URL}/api/honours`);
     const honoursData = res.data;
 
     return {
