@@ -11,7 +11,7 @@ export default async function squadHandler(
       try {
         res.status(200).json({ test: "hello test" });
       } catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(400).json({ error: "Server Error." });
       }
       break;
