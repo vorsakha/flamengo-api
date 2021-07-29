@@ -12,7 +12,10 @@ type ElementTypes = {
 
 const url = "https://www.flamengo.com.br/titulosdoflamengo";
 
-const data = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function honourHandler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { method } = req;
 
   switch (method) {
@@ -98,6 +101,4 @@ const data = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(400).json({ error: "Wrong Method." });
       break;
   }
-};
-
-export default data;
+}

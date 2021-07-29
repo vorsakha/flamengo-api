@@ -14,7 +14,10 @@ const nextGamesUrl =
 const membersUrl =
   "https://www.nrnoficial.com.br/?utm_source=portal&utm_medium=menu&utm_campaign=associese";
 
-const data = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function miscHandler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { method } = req;
 
   switch (method) {
@@ -106,6 +109,4 @@ const data = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(400).json({ error: "Wrong Method." });
       break;
   }
-};
-
-export default data;
+}
