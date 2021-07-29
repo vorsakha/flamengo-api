@@ -121,7 +121,7 @@ const data = async (req: NextApiRequest, res: NextApiResponse) => {
       });
     }
 
-    res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
+    // res.setHeader("Cache-Control", "s-maxage=100, stale-while-revalidate");
 
     res.status(200).json(obj);
   } catch (error) {
