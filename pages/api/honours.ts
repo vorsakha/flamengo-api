@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getDom } from "./_lib/chromium";
+import { getDom } from "../../_lib/chromium";
 
 type ElementTypes = {
   honours: {
