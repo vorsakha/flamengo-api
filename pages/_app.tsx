@@ -22,10 +22,16 @@ body{
 }
 
 main {
-  margin-left: 270px;
-  padding-left: 1rem;
+  margin-top: 56px;
   height: 100%;
   min-height: 100vh;
+
+  @media screen and (min-width: 681px) {
+    margin-left: 270px;
+    margin-top: 0;
+  padding-left: 1rem;
+
+  }
 }
 
 code {

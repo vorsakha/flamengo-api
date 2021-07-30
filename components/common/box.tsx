@@ -7,6 +7,10 @@ const Box = styled.div`
   background-color: #fcfcfc;
   cursor: pointer;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  justify-content: center;
 
   p {
     color: #858585;
@@ -19,9 +23,12 @@ const Box = styled.div`
     margin: 0;
   }
 
+  a {
+    height: 100%;
+  }
+
   :hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border: 1px solid rgba(255, 54, 54, 0.5);
   }
 `;
 
