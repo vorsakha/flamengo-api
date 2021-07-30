@@ -7,8 +7,7 @@ interface Data {
 }
 
 // URLS
-const membersUrl =
-  "https://www.nrnoficial.com.br/?utm_source=portal&utm_medium=menu&utm_campaign=associese";
+const membersUrl = "https://www.nrnoficial.com.br/";
 
 // check if is in prod or dev
 const isDev = !process.env.AWS_REGION;
